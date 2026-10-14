@@ -209,7 +209,7 @@ int main() {
         while (!gpio_get(BUTTON_A) && !gpio_get(BUTTON_B)) {}
         repeating = false;
         struct repeating_timer timer2;
-        add_repeating_timer_ms(100, oled_draw, NULL, &timer2);
+        add_repeating_timer_ms(25, oled_draw, NULL, &timer2);
         while (points > 0) {
             tight_loop_contents();
         }
