@@ -146,7 +146,7 @@ static bool oled_draw(struct repeating_timer *t) {
                     int drawpos = enemigos[x] + i;
                     if (drawpos < 129 && drawpos > 0) contenido[drawpos] = sprite_enemy[i]; // añadir sprite
                 }
-                if (pagina == player_pag && enemigos[x]+3 >= 2 && enemigos[x]+3 <= 17) {
+                if (pagina == player_pag && enemigos[x]+3 >= 2 && enemigos[x]+3 <= 16) {
                     points -= 24;
                     if (points <= 0) return false;
                     player_pag += 1;
