@@ -8,7 +8,10 @@ project(i2c C CXX)
 
 pico_sdk_init()
 
-add_executable(i2c main.c)
+add_executable(
+        i2c
+        main.c
+)
 
 target_link_libraries(
         i2c
