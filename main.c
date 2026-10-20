@@ -482,6 +482,7 @@ static int sack(int argc, char **argv) {
     while (points > 0) {
         tight_loop_contents();
     }
+    oled_draw(NULL);
     return 0;
 }
 
