@@ -49,7 +49,7 @@ static int cmd_mask(int argc, char **argv);
 static int cmd_hola(int argc, char **argv);
 static int cmd_timer_on(int argc, char **argv);
 static int cmd_timer_off(int argc, char **argv);
-static int cmd_game(int argc, char **argv);
+static int sack(int argc, char **argv);
 // Secundarias
 //void timer0_isr();
 
@@ -64,7 +64,7 @@ static const command_t commands[] = {
     {"hola",        "Muestra Hola mundo",                   cmd_hola},
     {"timer_on",    "Enciende el Temporizador",             cmd_timer_on},
     {"timer_off",   "Apaga el Temporizador",                cmd_timer_off},
-    {"game",        "Arranca el juego SACK",                cmd_game}
+    {"game",        "Arranca el juego SACK",                sack}
 };
 
 #define COMMAND_COUNT (sizeof(commands) / sizeof(commands[0]))
@@ -467,7 +467,10 @@ static void init_game() {
     enemigos[10] = 130 + enemy_offset*5;
     enemigos[11] = 7; // Enemigo 6
 }
-static int cmd_game(int argc, char **argv) {
+
+static int sack(int argc, char **argv) {
+    stdio_init_all();
+    hardware_init() ;
     init_game();
     struct repeating_timer timer;
     title(NULL);
@@ -476,16 +479,8 @@ static int cmd_game(int argc, char **argv) {
     repeating = false;
     struct repeating_timer timer2;
     add_repeating_timer_ms(25, oled_draw, NULL, &timer2);
-
-    char line[LINE_BUFFER_SIZE];
-    char *stop_cmd[MAX_ARGS];
-    while (true) {
-        printf("\n\tEscriba C para salir del juego.");
-        read_line(line, sizeof(line));
-        int a = split_line(line, stop_cmd, MAX_ARGS);
-        if (!strcmp(stop_cmd[0], "C") && !strcmp(stop_cmd[0], "c")) {
-            return 0;
-        }
+    while (points > 0) {
+        tight_loop_contents();
     }
     return 0;
 }
