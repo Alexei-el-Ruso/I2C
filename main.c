@@ -350,7 +350,7 @@ const static uint8_t sprite_enemy[8] = { // Asteroide o bache, o lo que sea.
     0b10010001
 };
 static bool oled_draw(struct repeating_timer *t) {
-    if (points <= 0) return false;
+
     // Score Board o cabecera
     for (uint8_t pagina = 0; pagina < 2; pagina++) {
         static uint8_t cabecera[129]; // Contenido de dibujo
@@ -409,6 +409,7 @@ static bool oled_draw(struct repeating_timer *t) {
     }
     if (gpio_get(BUTTON_A) && player_pag < 7) player_pag++;
     if (gpio_get(BUTTON_B) && player_pag > 2) player_pag--;
+    if (points <= 0) return false;
     return true;
 }
 static uint8_t title_label[] = {
